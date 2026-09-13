@@ -1,63 +1,62 @@
 import Select from 'react-select'; 
 import { useState, useMemo } from 'react'; 
 
+export default function LengthConverter() {
+  const [lengthUnit, setLengthUnit ] = useState('m'); 
+  const [convertUnit, setConvertUnit ] = useState('km'); 
+  const [value, setValue ] = useState(1)
 
-export default function UnitConverter() {
-  const [ length, setLength ] = useState(1); 
-  const [ currentUnit, setCurrentUnit ] = useState('m');
-  const [ currentLabel, setCurrentLabel ] = useState('Meter'); 
-  const [ convertToUnit, setConvertToUnit ] = useState('km'); 
-  const [ convertToLabel, setConvertToLabel ] = useState('Kilometer'); 
+  const options = [
+    {value: 'km', label: 'Kilometer'}, 
+    {value: 'm', label: 'Meter'}, 
+    {value: 'dm', label: 'Decimeter'}, 
+    {value: 'cm', label: 'Centimeter'},
+    {value: 'mm', label: 'Millimeter'}, 
+    {value: 'hm', label: 'Hectometer'}, 
+    {value: 'dam', label: 'Decameter'}, 
+    {value: 'in', label: 'Inch'}, 
+    {value: 'ft', label: 'Foot'}, 
+    {value: 'yd', label: 'Yard'}, 
+    {value: 'mi', label: 'Mile'}, 
+    {value: 'nmi', label: 'Nautical Mile'}, 
 
-  const lengthUnits = [
-    { value: 'Km', label: 'Kilometer'}, 
-    { value: 'm', label: 'Meter' }, 
-    { value: 'cm', label: 'Centimeter' }, 
-    { value: 'mm', label: 'Milimeter' }, 
-    { value: 'ft', label: 'Feet'}, 
-    { value: 'in', label: 'Inches'}
-  ]
-
-  const lengthConverted = {
+  ] 
+  
+  const unitValues = {
     'km': 0.001, 
     'm': 1, 
-    'cm': 100, 
+    'dm': 10, 
+    'cm': 100,
     'mm': 1000, 
-    'ft': 0.3048, 
-    'in': 0.0254
+    'hm': 0.01, 
+    'dam': 0.1, 
+    'in': 39.37008, 
+    'ft': 3.2808, 
+    'yd': 1.093613, 
+    'mi': 0.0006213712, 
+    'nmi': 0.0005399568
   } 
-
-  const conversion = useMemo(() => {
-    return length * lengthConverted[convertToUnit]/lengthConverted[currentUnit]; 
-  }, [length, currentUnit, convertToUnit])
-
+  const convertedValue = useMemo(() => {
+    return value * unitValues[convertUnit]/unitValues[lengthUnit]
+  }, [value, lengthUnit, convertUnit])
+  
   return (
     <div className="container">
-      <form onSubmit={(e) => {e.preventDefault()}}>
-        <div className="input-container">
-          <label>Input your length: </label><br></br>
-          <input type="number" min='1' value={length} onChange={(e) => {
-            setLength(e.target.value) 
-          }} />
+      <h1 className="heading">Length Converter</h1> 
+
+      <input type="number" className="input-number" defaultValue={1} onChange={(e) => setValue(e.target.value)}/> 
+
+      <div className="input-units">
+        <div className="convert-from">
+          <label htmlFor="convert-from" className="convert-from-label">Convert from: {lengthUnit}</label>
+          <Select options={options} defaultValue={options[1]} onChange={(e) => {setLengthUnit(e.value)}} /> 
         </div>
-        <div className="input-container">
-          <label>Convert from: {currentLabel}</label> 
-          <Select options={lengthUnits} onChange={(e) => {
-            setCurrentUnit(e.value) 
-            setCurrentLabel(e.label) 
-          }} 
-          defaultValue={lengthUnits[1]}/>
+        <div className="convert-to">
+          <label htmlFor="convert-to" className="convert-to-label">Convert to: {convertUnit}</label>
+          <Select options={options} defaultValue={options[0]} onChange={(e) => {setConvertUnit(e.value)}}/>
         </div>
-        <div className="input-container">
-          <label>Convert to: {convertToLabel}</label>
-          <Select options={lengthUnits} onChange={(e) => {
-            setConvertToUnit(e.value) 
-            setConvertToLabel(e.label) 
-          }} 
-          defaultValue={lengthUnits[0]}/>
-        </div>
-      </form>
-      <p>{conversion.toFixed(3)} {convertToUnit}</p>
+      </div>
+      <p className="result-display">{convertedValue ? `${convertedValue.toFixed(4)} ${convertUnit}`: ''}</p>
     </div>
   )
 }

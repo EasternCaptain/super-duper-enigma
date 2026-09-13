@@ -57,13 +57,14 @@ body {
 #root {
   width: 1126px;
   max-width: 100%;
-  margin: 0 auto;
+  margin: auto;
   text-align: center;
   border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  align-items: center;
 }
 
 h1,
@@ -109,26 +110,45 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
-
-.input-container {
-  font-size: large; 
-  margin-bottom: 10%; 
-  margin-right: 15%; 
-  margin-left: 15%; 
-  padding: 4%; 
-  font-weight: bold; 
-  color: rgb(17, 138, 190);
+.container {
+  display: flex; 
+  flex-direction: column; 
+  width: 450px; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 30px; 
 } 
-label {
-  margin: 10px; 
-} 
-input {
-  font-size: large; 
+.input-number {
+  appearance: textfield; 
   text-align: center; 
+  font-size: 1.5rem; 
+  border-radius: 5px; 
   padding: 10px; 
-  border-radius: 10px; 
+  font-family: 'Times New Roman', Times, serif; 
 } 
-p {
-  font-size: 2rem; 
-  font-weight: bolder; 
+.input-units {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 20px; 
+} 
+.css-b62m3t-container {
+  font-size: 1.2rem;
+  color: black; 
+  font-weight: bold; 
+  font-family: sans-serif; 
+} 
+.convert-from-label, 
+.convert-to-label {
+  font-size: 1.4rem; 
+  color: #fff; 
+  margin: 10px; 
+  padding: 10px; 
+  font-family: 'Times New Roman', Times, serif; 
+} 
+.result-display {
+  font-size: 3.5rem;
+  color: rebeccapurple; 
+  font-family: 'Times New Roman', Times, serif; 
+  margin: 20px; 
+  padding: 20px; 
 }

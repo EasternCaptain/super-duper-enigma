@@ -1,10 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import UnitConverter from './App.jsx'
+import LengthConverter from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <UnitConverter />
+    <LengthConverter />
   </StrictMode>,
 )
