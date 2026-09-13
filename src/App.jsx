@@ -48,11 +48,11 @@ export default function LengthConverter() {
 
       <div className="input-units">
         <div className="convert-from">
-          <label htmlFor="convert-from" className="convert-from-label">Convert from: {lengthUnit}</label>
+          <label htmlFor="convert-from" className="convert-from-label">Convert from</label>
           <Select options={options} defaultValue={options[1]} onChange={(e) => {setLengthUnit(e.value)}} /> 
         </div>
         <div className="convert-to">
-          <label htmlFor="convert-to" className="convert-to-label">Convert to: {convertUnit}</label>
+          <label htmlFor="convert-to" className="convert-to-label">Convert to</label>
           <Select options={options} defaultValue={options[0]} onChange={(e) => {setConvertUnit(e.value)}}/>
         </div>
       </div>
